@@ -6,6 +6,7 @@ def init_db():
         c.execute('''CREATE TABLE IF NOT EXISTS usuarios (
                         id INTEGER PRIMARY KEY AUTOINCREMENT,
                         email TEXT UNIQUE NOT NULL,
+                        nome TEXT NOT NULL,
                         senha TEXT NOT NULL,
                         telefone TEXT NOT NULL,
                         tipo TEXT DEFAULT 'normal',

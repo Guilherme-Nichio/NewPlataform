@@ -1,6 +1,6 @@
 from flask import Flask
 from models import init_db
-
+init_db()
 app = Flask(__name__)
 app.secret_key = 'sua_chave_super_secreta_aqui'  
 from routes.auth import register_auth_routes

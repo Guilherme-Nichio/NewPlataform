@@ -39,7 +39,8 @@ form {
 }
 
 input[type="telefone"],
-input[type="email"] {
+input[type="email"],
+input[type="nome"] {
   padding: 0.75rem;
   border: 1px solid var(--cor-borda);
   border-radius: 8px;

@@ -17,10 +17,10 @@ def register_auth_routes(app):
             senha = request.form['senha']
             with sqlite3.connect('db.sqlite3') as conn:
                 user = conn.execute("SELECT * FROM usuarios WHERE email=?", (email,)).fetchone()
-                if user and check_password_hash(user[2], senha):
+                if user and check_password_hash(user[3], senha):
                     session['user_id'] = user[0]
-                    session['tipo'] = user[4]
-                    if user[4] == 'admin':
+                    session['tipo'] = user[5]
+                    if user[5] == 'admin':
                         return redirect('/admin')
                     return redirect('/dashboard')
             return "Login inválido."

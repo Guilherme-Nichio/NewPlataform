@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Usuários Cadastrados</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='usuarios.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>Usuários Cadastrados</h2>
+    <a href="/admin/cadastrar">Novo Usuário</a><br><br>
+    <a href="/admin/cadastrar-em-massa">Cadastrar em massa</a><br><br>
+    Filtrar:
+    <a href="/admin/usuarios?filtro=todos">Todos</a> |
+    <a href="/admin/usuarios?filtro=ativos">Ativos</a> |
+    <a href="/admin/usuarios?filtro=inativos">Inativos</a><br><br>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Nome</th>
+          <th>Tipo</th>
+          <th>Status</th>
+          <th>Expiração</th>
+          <th>Respostas</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for u in usuarios %}
+        <tr>
+          <td data-label="Email">{{ u[1] }}</td>
+          <td data-label="Nome">{{ u[2] }}</td>
+          <td data-label="Tipo">{{ u[3] }}</td>
+          <td data-label="Status" class="status-{{ 'ativo' if u[4] == 1 else 'inativo' }}">
+            {{ 'Ativo' if u[4] == 1 else 'Inativo' }}
+          </td>
+          <td data-label="Expiração">{{ u[5] }}</td>
+          <td data-label="Respostas">{{ u[6] }}</td>
+          <td data-label="Ações">
+            <a href="/admin/usuario/{{ u[0] }}/toggle">
+              {{ 'Desativar' if u[4] == 1 else 'Ativar' }}
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

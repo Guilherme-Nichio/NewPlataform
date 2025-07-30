@@ -3,6 +3,7 @@ from werkzeug.security import generate_password_hash
 import sqlite3
 from datetime import datetime, timedelta
 from openpyxl import load_workbook
+
 def criar_admin():
     with sqlite3.connect('db.sqlite3') as conn:
         c = conn.cursor()
@@ -10,8 +11,8 @@ def criar_admin():
         if not admin:
             senha_hash = generate_password_hash("admin123")  # senha padrão
             c.execute(
-                    "INSERT INTO usuarios (email, senha, telefone, tipo) VALUES (?, ?, ?, ?)",
-                    ("admin@admin.com", senha_hash, "00000000", "admin")
+                    "INSERT INTO usuarios (email,nome, senha, telefone, tipo) VALUES (?, ?, ?, ?, ?)",
+                    ("admin@admin.com","admin", senha_hash, "00000000", "admin")
             )
             conn.commit()
             
@@ -45,14 +46,15 @@ def register_admin_routes(app):
         if request.method == 'POST':
             telefone = request.form['telefone']
             email = request.form['email']
+            nome = request.form['nome']
             senha_gerada = 'ENES2025'
             senha_hash = generate_password_hash(senha_gerada)
             validade = (datetime.now() + timedelta(days=365)).strftime('%Y-%m-%d')
 
             with sqlite3.connect('db.sqlite3') as conn:
                 conn.execute(
-                    "INSERT INTO usuarios (email, telefone, senha, tipo, ativo, data_expiracao) VALUES (?, ?, ?, ?, ?, ?)",
-                    (email, telefone, senha_hash, 'normal', 1, validade)
+                    "INSERT INTO usuarios (email, nome, telefone, senha, tipo, ativo, data_expiracao) VALUES (?,?, ?, ?, ?, ?, ?)",
+                    (email, nome, telefone, senha_hash, 'normal', 1, validade)
                 )
                 conn.commit()
             enviar_email(email, senha_gerada)
@@ -78,7 +80,8 @@ def register_admin_routes(app):
             for i, row in enumerate(ws.iter_rows(min_row=2, values_only=True), start=2):
                 email = row[0]
                 telefone = row[1]
-                if not email or not telefone:
+                nome = row[3]
+                if not email or not telefone or not nome:
                     continue
 
                 senha = 'ENES2025'
@@ -87,8 +90,8 @@ def register_admin_routes(app):
                 try:
                     with sqlite3.connect('db.sqlite3') as conn:
                         conn.execute(
-                            "INSERT INTO usuarios (email, telefone, senha, tipo, ativo, data_expiracao) VALUES (?, ?, ?, ?, ?, ?)",
-                            (email, telefone, senha_hash, 'normal', 1, validade)
+                            "INSERT INTO usuarios (email, nome, telefone, senha, tipo, ativo, data_expiracao) VALUES (?, ?, ?, ?, ?, ?, ? )",
+                            (email, nome, telefone, senha_hash, 'normal', 1, validade)
                         )
                         conn.commit()
                     usuarios_adicionados.append(email)
@@ -105,7 +108,7 @@ def register_admin_routes(app):
 
         filtro = request.args.get('filtro', 'todos')  # ativos, inativos, todos
         query = """
-            SELECT u.id, u.email, u.tipo, u.ativo, u.data_expiracao, COUNT(r.id)
+            SELECT u.id, u.email,u.nome, u.tipo, u.ativo, u.data_expiracao, COUNT(r.id)
             FROM usuarios u
             LEFT JOIN formularios f ON f.user_id = u.id
             LEFT JOIN respostas r ON r.formulario_id = f.id

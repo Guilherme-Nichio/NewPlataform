@@ -217,6 +217,15 @@ def register_formulario_routes(app):
         tipo_PN = "Pigmentada (P)" if P_N >= 11 else "Não-pigmentada (N)"
         tipo_WT = "Enrugada (W)" if W_T >= 15 else "Firme (T)"
 
+        tipo_OD2 = "O" if O_D >= 13 else "D"
+        tipo_SR2 = "S" if S_R >= 9 else "R"
+        tipo_PN2 = "P" if P_N >= 11 else "N"
+        tipo_WT2 = "W" if W_T >= 15 else "T"
+
+        combined_string = f"{tipo_OD2} {tipo_SR2} {tipo_PN2} {tipo_WT2}"
+        print(combined_string)
+
+
         qtd_a = hidratacao.count(1)
         qtd_b = hidratacao.count(2)
         tipo_hidratacao = "Desidratada" if qtd_a > qtd_b else "Equilibrada"
@@ -226,5 +235,6 @@ def register_formulario_routes(app):
             'S x R': tipo_SR,
             'P x N': tipo_PN,
             'W x T': tipo_WT,
-            'Hidratação': tipo_hidratacao
+            'Hidratação': tipo_hidratacao,
+            'Tipo_de_pele' : combined_string
         }
