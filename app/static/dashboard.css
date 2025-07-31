@@ -12,13 +12,13 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: var(--bg-color);
+  background: linear-gradient(#f7f4f4, #fafafa);
   color: var(--text-color);
   display: flex;
   justify-content: center;
   align-items: flex-start;
   min-height: 100vh;
-  padding: 20px;
+  padding: 10px;
   box-sizing: border-box;
 }
 
@@ -45,7 +45,9 @@ h2, h3 {
   display: inline-block;
   transition: background-color 0.3s ease;
 }
-
+span{
+  color: #d8a109;
+}
 .copy-button:hover {
   background-color: var(--button-hover);
 }
@@ -77,11 +79,12 @@ h2, h3 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  text-align: center;
   cursor: pointer;
-  padding: 15px 20px;
+  padding: 15px 10px ;
   font-weight: 600;
   font-size: 16px;
-  background-color: var(--highlight-bg);
+  background-color: #f1f1f1;
   color: var(--text-color);
   user-select: none;
   transition: background-color 0.3s ease;
@@ -104,24 +107,23 @@ h2, h3 {
   display: none; /* inicia fechado */
 }
 
-.respostas ul {
-  padding-left: 20px;
-  margin-top: 5px;
+.respostas{
+ 
+  gap: 10px;
+  padding:15px;
+}
+.respostas .resposta{
+  padding: 8px;
+  background-color: #ececec;
+  border-radius: 5px;
+  
+  
 }
 
-.respostas li {
-  margin-bottom: 6px;
-}
-
-.resultados {
-  background-color: var(--highlight-bg);
-  border-left: 4px solid var(--highlight-border);
+.respostas .respostasUnicas{
   padding: 10px;
-  border-radius: 6px;
-  margin-top: 15px;
-  font-size: 15px;
-  color: var(--text-color);
 }
+
 
 .links {
   text-align: center;
@@ -137,7 +139,20 @@ h2, h3 {
 .links a:hover {
   text-decoration: underline;
 }
+.tipoPeleBox {
+  display: flex;
+  gap: 10px;
+}
+.tipoPele{
+  padding: 10px;
+  color: #ffffff;
+  background-color: #1b1b1b;
+  border-radius: 10px;
+}
+.tipoPele2{
+  padding: 10px;
 
+}
 /* Responsivo */
 @media (max-width: 600px) {
   .copy-button {

@@ -19,7 +19,9 @@ def register_auth_routes(app):
                 user = conn.execute("SELECT * FROM usuarios WHERE email=?", (email,)).fetchone()
                 if user and check_password_hash(user[3], senha):
                     session['user_id'] = user[0]
+                    session['email'] = user[1]
                     session['tipo'] = user[5]
+                    session['nome'] = user[2]
                     if user[5] == 'admin':
                         return redirect('/admin')
                     return redirect('/dashboard')

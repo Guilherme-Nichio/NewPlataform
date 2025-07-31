@@ -54,6 +54,10 @@ def init_db():
             S_R INTEGER,
             P_N INTEGER,
             W_T INTEGER,
+            tipo_OD2 CHAR,
+            tipo_SR2 CHAR,
+            tipo_PN2 CHAR,
+            tipo_WT2 CHAR,
 
             FOREIGN KEY(formulario_id) REFERENCES formularios(id)
         )''')

@@ -7,8 +7,12 @@
 </head>
 <body>
   <div class="container">
-    <h2>Dashboard</h2>
-
+    <h2>Olá, <span>{{nome}}</span>.</h2>
+    <div class="detalhes">
+      <div id="questionariosRespondidos">
+        <p>{{qntResposta}}</p>
+      </div>
+    </div>
     <!-- Botão de copiar link -->
     <button id="btnCopiarLink" class="copy-button">📋 Copiar link de formulário</button>
 
@@ -27,29 +31,38 @@
         {% for r in respostas %}
           <div class="resposta-card" data-nome="{{ r[2] | lower }}">
             <div class="card-header">
-              <div>
-                <strong>Nome:</strong> {{ r[2] }} |
-                <strong>Telefone:</strong> {{ r[3] }}
+              <div class="tipoPeleBox">
+                <div  class="tipoPele2">Nome:  {{ r[2] }}</div>
+                <div  class="tipoPele2">Telefone:  {{ r[3] }}</div>
+                
+               
+                <div class="tipoPele">{{ r[30] }}</div>
+                <div class="tipoPele">{{ r[31] }}</div>
+                <div class="tipoPele">{{ r[32] }}</div>
+                <div class="tipoPele">{{ r[33] }}</div>
               </div>
               <div class="seta">&#9654;</div>
             </div>
 
             <div class="card-body">
+              <strong>Respostas:</strong><br>
               <div class="respostas">
-                <strong>Respostas:</strong>
-                <ul>
-                  {% for i in range(4, 26) %}
-                    <li><strong>Pergunta {{ i - 3 }}:</strong> {{ r[i] }}</li>
+                <div class="respostasUnicas">
+                  {% for i in range(4, 15) %}
+                    <strong class="resposta">{{i-3}}:{{r[i]}}</strong>
                   {% endfor %}
-                </ul>
+                </div>
+                
+                <div class="respostasUnicas">
+                  {% for i in range(15, 26) %}
+                    <strong class="resposta">{{i-3}}:{{r[i]}}</strong>
+                  {% endfor %}
+                </div>
+
+                
+               
               </div>
-              <div class="resultados">
-                <strong>Resultado:</strong><br>
-                O x D: {{ r[26] }}<br>
-                S x R: {{ r[27] }}<br>
-                P x N: {{ r[28] }}<br>
-                W x T: {{ r[29] }}
-              </div>
+             
             </div>
           </div>
         {% endfor %}

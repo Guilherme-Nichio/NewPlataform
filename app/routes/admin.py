@@ -125,6 +125,7 @@ def register_admin_routes(app):
 
         return render_template('usuarios_admin.html', usuarios=usuarios, filtro=filtro)
 
+
     @app.route('/admin/usuario/<int:user_id>/toggle')
     def toggle_usuario(user_id):
         if session.get('tipo') != 'admin':

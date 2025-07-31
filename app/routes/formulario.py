@@ -160,21 +160,27 @@ def register_formulario_routes(app):
                     S3Q1, S3Q2, S3Q3, S3Q4,
                     S4Q1, S4Q2, S4Q3, S4Q4, S4Q5, S4Q6,
                     S5Q1, S5Q2, S5Q3,
-                    O_D, S_R, P_N, W_T
+                    O_D, S_R, P_N, W_T,
+                    tipo_OD2, tipo_SR2, tipo_PN2, tipo_WT2
                 ) VALUES (?, ?, ?,
                           ?, ?, ?, ?, ?,
                           ?, ?, ?, ?,
                           ?, ?, ?, ?,
                           ?, ?, ?, ?, ?, ?,
                           ?, ?, ?,
-                          ?, ?, ?, ?)
+                          ?, ?, ?, ?, ? ,? , ? ,? )
             ''', (
                 form_id, nome, telefone,
                 *respostas,
                 resultado_valor(resultado['O x D']),
                 resultado_valor(resultado['S x R']),
                 resultado_valor(resultado['P x N']),
-                resultado_valor(resultado['W x T'])
+                resultado_valor(resultado['W x T']), 
+
+                resultado['tipo_OD2'],
+                resultado['tipo_SR2'],
+                resultado['tipo_PN2'],
+                resultado['tipo_WT2']
             ))
 
             conn.commit()
@@ -236,5 +242,9 @@ def register_formulario_routes(app):
             'P x N': tipo_PN,
             'W x T': tipo_WT,
             'Hidratação': tipo_hidratacao,
-            'Tipo_de_pele' : combined_string
+            'Tipo_de_pele' : combined_string,
+            'tipo_OD2': tipo_OD2,
+            'tipo_SR2': tipo_SR2,
+            'tipo_PN2': tipo_PN2,
+            'tipo_WT2': tipo_WT2
         }
