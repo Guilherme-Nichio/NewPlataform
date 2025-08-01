@@ -23,41 +23,8 @@ def init_db():
             formulario_id TEXT,
             nome TEXT,
             telefone TEXT,
-
-            S1Q1 CHAR,
-            S1Q2 CHAR,
-            S1Q3 CHAR,
-            S1Q4 CHAR,
-            S1Q5 CHAR,
-
-            S2Q1 CHAR,
-            S2Q2 CHAR,
-            S2Q3 CHAR,
-            S2Q4 CHAR,
-
-            S3Q1 CHAR,
-            S3Q2 CHAR,
-            S3Q3 CHAR,
-            S3Q4 CHAR,
-
-            S4Q1 CHAR,
-            S4Q2 CHAR,
-            S4Q3 CHAR,
-            S4Q4 CHAR,
-            S4Q5 CHAR,
-            S4Q6 CHAR,
-
-            S5Q1 CHAR,
-            S5Q2 CHAR,
-            S5Q3 CHAR,
-            O_D INTEGER,
-            S_R INTEGER,
-            P_N INTEGER,
-            W_T INTEGER,
-            tipo_OD2 CHAR,
-            tipo_SR2 CHAR,
-            tipo_PN2 CHAR,
-            tipo_WT2 CHAR,
-
+            data_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            respostas_json TEXT,
             FOREIGN KEY(formulario_id) REFERENCES formularios(id)
         )''')
+

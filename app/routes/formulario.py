@@ -1,9 +1,11 @@
 from flask import render_template, request, redirect, session, url_for
 import sqlite3
-
+from flask import request, jsonify
+import sqlite3
+import json
 def register_formulario_routes(app):
 
-    @app.route('/formulario/<form_id>/etapa1', methods=['GET', 'POST'])
+    @app.route('/formulario/<form_id>', methods=['GET', 'POST'])
     def formulario_etapa1(form_id):
         if request.method == 'POST':
             nome = request.form['nome']
@@ -24,7 +26,7 @@ def register_formulario_routes(app):
             if resposta:
                 return redirect(f'/formulario/{form_id}/confirmar-substituicao')
             else:
-                return redirect(f'/formulario/{form_id}/Session1')
+                return redirect(f'/formulario/<form_id>/Skin')
         # Aqui você pode substituir pelo render_template do seu formulário etapa1
         return '''
             <h2>Identifique-se</h2>
@@ -34,6 +36,30 @@ def register_formulario_routes(app):
                 <button type="submit">Próxima etapa</button>
             </form>
         '''
+
+
+    @app.route('/formulario/<form_id>/Skin')
+    def exibir_quiz(form_id):
+        # aqui pode passar dados para o template, se precisar
+        return render_template('formulario.html', form_id=form_id)
+   
+    @app.route('/formulario/<form_id>/Skin', methods=['POST'])
+    def quiz_skin(form_id):
+        dados = request.json
+        respostas_filtradas = {k: v for k, v in dados.items() if k.isdigit()}
+
+        nome = session.get('nome')
+        telefone = session.get('telefone')   
+
+        with sqlite3.connect('db.sqlite3') as conn:
+            c = conn.cursor()
+            c.execute('''INSERT INTO respostas (formulario_id, nome, telefone, respostas_json)
+                        VALUES (?, ?, ?, ?)''',
+                    (form_id, nome, telefone, json.dumps(respostas_filtradas)))
+            conn.commit()
+        return jsonify({"mensagem": "Respostas enviadas com sucesso!"})
+
+
 
     @app.route('/formulario/<form_id>/confirmar-substituicao', methods=['GET', 'POST'])
     def confirmar_substituicao(form_id):
