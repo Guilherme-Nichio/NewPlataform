@@ -17,9 +17,10 @@
     <div class="question" id="questionText">Carregando...</div>
     <div class="options" id="optionsContainer"></div>
     <button class="next-btn" id="nextBtn" disabled>Próxima</button>
+    <button id="autoFillBtn" style="margin-bottom: 20px;">Preencher com respostas de teste</button>
   </div>
   <script>
-    const formId = "{{ form_id }}";
+    const form_id = "{{ form_id }}";
   </script>
   <script src="{{ url_for('static', filename='formulario.js') }}"></script>
 

@@ -373,7 +373,7 @@ function enviarRespostas() {
   nextBtn.style.display = "none";
   progressFill.style.width = "100%";
 
-  fetch(`/formulario/${formId}/Skin`, {
+  fetch(`/formulario/${form_id}/Skin`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -383,9 +383,63 @@ function enviarRespostas() {
     .then(response => response.json())
     .then(data => {
       questionText.textContent = "Quiz finalizado!";
-      optionsContainer.innerHTML = `<p>${data.mensagem}</p>`;
+
+      if (data.resultado) {
+        const r = data.resultado;
+        const resultadoTexto = `
+          <h3>Resultado da sua pele:</h3>
+          <ul>
+            <li><strong>Oleosidade:</strong> ${r["O x D"]}</li>
+            <li><strong>Sensibilidade:</strong> ${r["S x R"]}</li>
+            <li><strong>Pigmentação:</strong> ${r["P x N"]}</li>
+            <li><strong>Firmeza:</strong> ${r["W x T"]}</li>
+            <li><strong>Hidratação:</strong> ${r["Hidratação"]}</li>
+            <li><strong>Código final:</strong> <span style="font-weight:bold">${r["Tipo_de_pele"]}</span></li>
+          </ul>
+        `;
+
+        optionsContainer.innerHTML = resultadoTexto;
+      } else {
+        optionsContainer.innerHTML = `<p>${data.mensagem}</p>`;
+      }
+    })
+    .catch(err => {
+      questionText.textContent = "Erro ao enviar.";
+      optionsContainer.innerHTML = `<p>Ocorreu um erro. Tente novamente.</p>`;
+      console.error(err);
     });
 }
+
+// codigo para teste
+document.getElementById("autoFillBtn").addEventListener("click", () => {
+  respostas = {};
+  indice = 0;
+
+  function responderAutomaticamente() {
+    if (indice >= perguntas.length) {
+      enviarRespostas();
+      return;
+    }
+
+    const atual = perguntas[indice];
+
+    if (atual.tipo === "fechada") {
+      const letras = Object.keys(atual.opcoes);
+      respostaAtual = letras[Math.floor(Math.random() * letras.length)];
+    } else {
+      respostaAtual = "teste automático";
+    }
+
+    respostas[(indice + 1).toString()] = respostaAtual;
+    indice++;
+    renderizarPergunta();
+
+    setTimeout(responderAutomaticamente, 100);
+  }
+
+
+  responderAutomaticamente();
+});
 
 renderizarPergunta();
 
