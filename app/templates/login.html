@@ -1,24 +1,28 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
   <link rel="stylesheet" href="/app/static/login.css"> 
 </head>
 <body>
-  
-  <form method="post">
-    <h2>Escola da pele</h2>
-    <h4>Acesso a plataforma</h4>
-    <label>Email:</label>
-    <input type="email" name="email" required><br>
+    <div class="waves">
+        <svg viewBox="0 0 1200 200" preserveAspectRatio="none">
+        <path d="M0,0 C150,150 1050,-50 1200,100 L1200,200 L0,200 Z" fill="#181818" />
+        
+        </svg>
 
-    <label>Senha:</label>
-    <input type="password" name="senha" required><br>
-
-    <button type="submit">Entrar</button>
-  </form>
-  
+      </div>
+  <div class="login-container">
+    <h2>Login</h2>
+    <form method="post">
+      <input type="email" placeholder="E-email" name="email" required>
+      <input type="password" placeholder="Senha" name="senha" required>
+      <button type="submit">Entrar</button>
+    </form>
+  </div>
 </body>
+
 </html>

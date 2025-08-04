@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Formulário já respondido</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='confirmarReenvio.css') }}">
+  <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+</head>
+<body>
+  <div class="form-alert-container">
+    <div class="form-alert-box">
+      <h2>Você já respondeu este formulário</h2>
+      <p>Deseja responder novamente e substituir a resposta anterior?</p>
+      <form method="post" class="form-alert-form">
+        <button type="submit" name="acao" value="sim" class="btn-confirm">Sim, quero atualizar</button>
+        <button type="submit" name="acao" value="nao" class="btn-cancel">Não</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

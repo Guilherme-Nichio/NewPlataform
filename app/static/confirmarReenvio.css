@@ -1,0 +1,70 @@
+body{
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #b9b9b9, #ffffff);
+}
+.form-alert-container {
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  
+}
+
+.form-alert-box {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  padding: 30px 40px;
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+}
+
+.form-alert-box h2 {
+  margin-bottom: 15px;
+  font-size: 1.5em;
+  color: #333;
+}
+
+.form-alert-box p {
+  font-size: 1em;
+  color: #555;
+  margin-bottom: 25px;
+}
+
+.form-alert-form {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.btn-confirm,
+.btn-cancel {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-confirm {
+  background-color: #181818;
+  color: white;
+}
+
+.btn-confirm:hover {
+  background-color: #bfa01f;
+}
+
+.btn-cancel {
+  background-color: #888888;
+  color: white;
+}
+
+.btn-cancel:hover {
+  background-color: #666666;
+}

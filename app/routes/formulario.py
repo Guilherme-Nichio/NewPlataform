@@ -27,14 +27,7 @@ def register_formulario_routes(app):
             else:
                 return redirect(f'/formulario/{form_id}/Skin')
         # Aqui você pode substituir pelo render_template do seu formulário etapa1
-        return '''
-            <h2>Identifique-se</h2>
-            <form method="post">
-                Nome: <input name="nome"><br>
-                Telefone: <input name="telefone"><br>
-                <button type="submit">Próxima etapa</button>
-            </form>
-        '''
+        return render_template('formEtapa1.html', form_id=form_id)
 
     @app.route('/formulario/<form_id>/Skin', methods=['GET','POST'])
     def quiz_skin(form_id):
@@ -97,9 +90,22 @@ def register_formulario_routes(app):
 
             with sqlite3.connect('db.sqlite3') as conn:
                 c = conn.cursor()
-                c.execute('''INSERT INTO respostas (formulario_id, nome, telefone, respostas_json)
-                            VALUES (?, ?, ?, ?)''',
-                        (form_id, nome, telefone, json.dumps(respostas_filtradas)))
+                c.execute('''INSERT INTO respostas 
+                    (formulario_id, nome, telefone, respostas_json, "OxD", "SxR", "PxN", "WxT", Hidratacao)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)''',
+                    (
+                        form_id,
+                        nome,
+                        telefone,
+                        json.dumps(respostas_filtradas),
+                        resultado['tipo_OD2'],
+                        resultado['tipo_SR2'],
+                        resultado['tipo_PN2'],
+                        resultado['tipo_WT2'],
+                        resultado['Hidratação']
+                    )
+                )
+
                 conn.commit()
             return jsonify({"mensagem": "Respostas enviadas com sucesso!", 'resultado': resultado})
 
@@ -110,16 +116,9 @@ def register_formulario_routes(app):
         if request.method == 'POST':
             acao = request.form.get('acao')
             if acao == 'sim':
-                return redirect(f'/formulario/{form_id}/Session1')
+                return redirect(f'/formulario/{form_id}/Skin')
             else:
                 session.clear()
                 return "Resposta não foi alterada."
         # Pode trocar por template real de confirmação
-        return '''
-            <h2>Você já respondeu este formulário</h2>
-            <p>Deseja responder novamente e substituir a resposta anterior?</p>
-            <form method="post">
-                <button type="submit" name="acao" value="sim">Sim, quero atualizar</button>
-                <button type="submit" name="acao" value="nao">Não</button>
-            </form>
-        '''
+        return  render_template('confirmarReenvio.html', form_id=form_id)

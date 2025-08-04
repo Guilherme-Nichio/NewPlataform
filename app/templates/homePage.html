@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='homePage.css') }}">
+</head>
+<body>
+    <div class="waves">
+        <svg viewBox="0 0 1200 200" preserveAspectRatio="none">
+        <path d="M0,0 C150,150 1050,-50 1200,100 L1200,200 L0,200 Z" fill="#181818" />
+        </svg>
+    </div>
+    <div class="index1">
+        <div class="informacoes">
+            <img src="{{ url_for('static', filename='escoladapele.jpg') }}" alt="Logo">
+            <h1>Bem vinda Herdeira!</h1>
+            <p>Realize seu login ou solicite acesso para <br> poder enviar seus proprios forumarios!</p>
+        </div>
+        <a href="/login">Prosseguir para Login</a>
+    </div>
+
+</body>
+
+</html>

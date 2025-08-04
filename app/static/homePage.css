@@ -11,12 +11,12 @@ body.fade-out {
 body, html {
   height: 100%;
   font-family: Arial, sans-serif;
-  background:  linear-gradient(to bottom, #b9b9b9, #ffffff);
+  background: linear-gradient(to bottom, #b9b9b9, #ffffff);
   overflow: hidden;
 }
 .waves {
   position: absolute;
-  top: 0;
+  bottom: 0;
   width: 100%;
   height: 60vh;
   z-index: 0;
@@ -26,35 +26,43 @@ body, html {
 .waves svg {
   width: 200%; 
   height: 100%;
-  transform: scaleY(-1); 
+  transform: scaleY(1); 
   animation: waveMove 10s linear infinite alternate;
 }
 
 @keyframes waveMove {
-  0% { transform: scaleY(-1) translateX(0); }
-  100% { transform: scaleY(-1) translateX(-25%); }
+  0% { transform: scaleY(1) translateX(0); }
+  100% { transform: scaleY(1) translateX(-25%); }
 }
 
 
-.login-container {
+
+
+.index1 {
   position: relative;
   z-index: 1;
-  background: rgba(255, 255, 255, 0.9);
-  width: 400px;
+  background: rgba(24, 24, 24, 0.9);
+  width: 500px;
   margin: 10% auto;
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.2);
   text-align: center;
 }
-.login-container img{
-    width: 10px;
+.index1 img{
+    width: 75%;
 }
-.login-container h2 {
+.index1 h1 {
+  color: #fff;
   margin-bottom: 20px;
+  margin-top: 50px;
+}
+.index1 p {
+  color: #fff;
+  margin-bottom:60px;
 }
 
-.login-container input {
+.index1 input {
   width: 100%;
   padding: 12px;
   margin: 10px 0;
@@ -62,19 +70,23 @@ body, html {
   border-radius: 6px;
 }
 
-.login-container button {
+.index1 a {
   width: 100%;
-  margin-top: 15px;
-  padding: 12px;
-  background-color: #181818;
+  margin-top: 25px;
+  padding: 12px 50px;
+  background-color: #ffa115;
   color: white;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
   transition: 0.3s;
+
+  text-decoration: none;
 }
 
-.login-container button:hover {
-  background-color: #ffa115;
+
+.index1 a:hover {
+  background-color: #f7f7f7;
+  color: rgba(24, 24, 24);;
 }

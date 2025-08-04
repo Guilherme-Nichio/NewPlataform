@@ -7,67 +7,42 @@
 </head>
 <body>
   <div class="container">
-    <h2>Olá, <span>{{nome}}</span>.</h2>
+    <h2>Olá, <span>{{ nome }}</span>.</h2>
     <div class="detalhes">
       <div id="questionariosRespondidos">
-        <p>{{qntResposta}}</p>
+        <p>{{ qntResposta }} formulários respondidos</p>
       </div>
     </div>
-    <!-- Botão de copiar link -->
-    <button id="btnCopiarLink" class="copy-button">📋 Copiar link de formulário</button>
 
-    <!-- Campo de pesquisa -->
-    <input
-      type="text"
-      id="pesquisaNome"
-      placeholder="Pesquisar formulário pelo nome..."
-      class="input-pesquisa"
-    />
+    <button id="btnCopiarLink" class="copy-button">📋 Copiar link de formulário</button>
+    <input type="text" id="pesquisaNome" placeholder="Pesquisar por nome..." class="input-pesquisa" />
 
     <h3>Respostas recebidas:</h3>
-
     <div id="listaRespostas">
       {% if respostas %}
         {% for r in respostas %}
           <div class="resposta-card" data-nome="{{ r[2] | lower }}">
             <div class="card-header">
               <div class="tipoPeleBox">
-                <div  class="tipoPele2">Nome:  {{ r[2] }}</div>
-                <div  class="tipoPele2">Telefone:  {{ r[3] }}</div>
-                
-               
-                <div class="tipoPele">{{ r[30] }}</div>
-                <div class="tipoPele">{{ r[31] }}</div>
-                <div class="tipoPele">{{ r[32] }}</div>
-                <div class="tipoPele">{{ r[33] }}</div>
+                <div class="tipoPele2">Nome: {{ r[2] }}</div>
+                <div class="tipoPele2">Telefone: {{ r[3] }}</div>
+
               </div>
               <div class="seta">&#9654;</div>
             </div>
-
             <div class="card-body">
-              <strong>Respostas:</strong><br>
-              <div class="respostas">
-                <div class="respostasUnicas">
-                  {% for i in range(4, 15) %}
-                    <strong class="resposta">{{i-3}}:{{r[i]}}</strong>
-                  {% endfor %}
-                </div>
-                
-                <div class="respostasUnicas">
-                  {% for i in range(15, 26) %}
-                    <strong class="resposta">{{i-3}}:{{r[i]}}</strong>
-                  {% endfor %}
-                </div>
-
-                
-               
-              </div>
-             
+              <strong>Respostas em JSON:</strong>
+                <div class="tipoPele">Tipo: {{ r[6] }}</div>
+                <div class="tipoPele">Reatividade: {{ r[7] }}</div>
+                <div class="tipoPele">Pigmentação: {{ r[8] }}</div>
+                <div class="tipoPele">Tônus: {{ r[9] }}</div>
+                <div class="tipoPele">Hidratação: {{ r[10] }}</div>
+              <pre>{{ r[5] }}</pre>
             </div>
           </div>
         {% endfor %}
       {% else %}
-        <p>Nenhuma resposta encontrada ainda.</p>
+        <p>Nenhuma resposta ainda.</p>
       {% endif %}
     </div>
 

@@ -9,6 +9,12 @@ def register_auth_routes(app):
         session.clear()
         return redirect('/login')
 
+
+    # Rota de logout
+    @app.route('/')
+    def Homepage():
+        return render_template('homePage.html')
+    
     # Rota de login
     @app.route('/login', methods=['GET', 'POST'])
     def login():

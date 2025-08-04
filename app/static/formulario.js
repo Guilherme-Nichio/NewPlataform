@@ -323,14 +323,14 @@ const progressFill = document.getElementById("progressFill");
 
 function renderizarPergunta() {
   const atual = perguntas[indice];
-  questionText.textContent = `${indice + 1}) ${atual.texto}`;
+  questionText.textContent = ` ${atual.texto}`;
   optionsContainer.innerHTML = "";
   respostaAtual = null;
 
   if (atual.tipo === "fechada") {
     for (let letra in atual.opcoes) {
       const btn = document.createElement("button");
-      btn.textContent = `${letra}) ${atual.opcoes[letra]}`;
+      btn.textContent = `${atual.opcoes[letra]}`;
       btn.addEventListener("click", () => {
         respostaAtual = letra;
         document.querySelectorAll(".options button").forEach(b => b.classList.remove("selected"));

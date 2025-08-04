@@ -25,6 +25,11 @@ def init_db():
             telefone TEXT,
             data_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             respostas_json TEXT,
+            OxD TEXT,
+            SxR TEXT,
+            PxN TEXT,
+            WxT TEXT,
+            Hidratacao TEXT,      
             FOREIGN KEY(formulario_id) REFERENCES formularios(id)
         )''')
 
