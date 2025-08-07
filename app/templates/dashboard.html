@@ -21,23 +21,56 @@
     <div id="listaRespostas">
       {% if respostas %}
         {% for r in respostas %}
-          <div class="resposta-card" data-nome="{{ r[2] | lower }}">
+          <div class="resposta-card" data-nome="{{ r.nome | lower }}">
             <div class="card-header">
               <div class="tipoPeleBox">
-                <div class="tipoPele2">Nome: {{ r[2] }}</div>
-                <div class="tipoPele2">Telefone: {{ r[3] }}</div>
-
+                <div class="tipoPele2">Nome: {{ r.nome }}</div>
+                <div class="tipoPele2">Telefone: {{ r.telefone }}</div>
+                <div class="typeChar">{{ r.OxD }}</div>
+                <div class="typeChar">{{ r.SxR }}</div>
+                <div class="typeChar">{{ r.PxN }}</div>
+                <div class="typeChar">{{ r.WxT }}</div>
               </div>
               <div class="seta">&#9654;</div>
             </div>
             <div class="card-body">
-              <strong>Respostas em JSON:</strong>
-                <div class="tipoPele">Tipo: {{ r[6] }}</div>
-                <div class="tipoPele">Reatividade: {{ r[7] }}</div>
-                <div class="tipoPele">Pigmentação: {{ r[8] }}</div>
-                <div class="tipoPele">Tônus: {{ r[9] }}</div>
-                <div class="tipoPele">Hidratação: {{ r[10] }}</div>
-              <pre>{{ r[5] }}</pre>
+              <strong>Respostas:</strong>
+              <div class="tipoPele">
+                Hidratação: {{ r.hidratacao }}
+              </div>
+              <div class="tipoPele">
+                Data do Envio: {{ r.data }}
+              </div>              
+              <h3>Respostas do formulário:</h3>
+                  <div class="respostas-container">
+                  <!-- Respostas Curtas (Alternativas) -->
+                  <div class="respostas-curtas">
+                    {% for pergunta, valor in r.respostas_json.items() %}
+                      {% if valor|length <= 1 %}
+                        <div class="resposta-box">
+                          <span><strong>P{{ pergunta }}:</strong> {{ valor }}</span>
+                        </div>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+
+                  <!-- Respostas Longas (Textos Digitados) -->
+                  <div class="respostas-longas">
+                    {% for pergunta, valor in r.respostas_json.items() %}
+                      {% if valor|length > 1 %}
+                        <div class="resposta-longa">
+                          <strong>Pergunta {{ pergunta }}:</strong>
+                          <pre>{{ valor }}</pre>
+                        </div>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>
+                <div class="botaoEmail">
+                  <button class="enviarCopiaPorEmail">Enviar relatorio por email</button>
+                </div>
+                
+              <hr>
             </div>
           </div>
         {% endfor %}

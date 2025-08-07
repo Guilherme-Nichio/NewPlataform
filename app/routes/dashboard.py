@@ -1,6 +1,7 @@
 from flask import render_template, redirect, session, jsonify, url_for, request
 import sqlite3
 import uuid
+import json
 
 def register_dashboard_routes(app):
     @app.route('/dashboard')
@@ -23,12 +24,31 @@ def register_dashboard_routes(app):
         with sqlite3.connect('db.sqlite3') as conn:
             info = conn.execute(query, (email,)).fetchall()
             formularios = conn.execute("SELECT id FROM formularios WHERE user_id=?", (session['user_id'],)).fetchall()
+            
             respostas = []
             for f in formularios:
                 r = conn.execute("SELECT * FROM respostas WHERE formulario_id=?", (f[0],)).fetchall()
-                respostas.extend(r)
+                for row in r:
+                    try:
+                        resposta_json = json.loads(row[5]) if row[5] else {}
+                    except Exception as e:
+                        print("Erro ao carregar JSON:", e)
+                        resposta_json = {}
+
+                    respostas.append({
+                        "nome": row[2],
+                        "telefone": row[3],
+                        "data":row[4],
+                        "OxD": row[6],
+                        "SxR": row[7],
+                        "PxN": row[8],
+                        "WxT": row[9],
+                        "hidratacao": row[10],
+                        "respostas_json": resposta_json
+                    })
 
         qntResposta = info[0][6] if info else 0
+
         return render_template('dashboard.html', respostas=respostas, nome=nome, qntResposta=qntResposta)
 
     @app.route('/api/gerar-link', methods=['POST'])

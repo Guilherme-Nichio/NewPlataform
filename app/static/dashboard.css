@@ -77,7 +77,16 @@ h3 {
   gap: 10px 20px;
   margin-bottom: 10px;
 }
+.tipoPeleBox .typeChar{
+  color: #fff;
+  background-color: #181818;
+  border-radius: 3px;
+  width: 25px;
+  font-weight: bold;
+  align-items: center;
+  text-align: center;
 
+}
 .tipoPele, .tipoPele2 {
   font-weight: bold;
   padding: 5px 10px;
@@ -119,5 +128,66 @@ pre {
 }
 
 .links a:hover {
-  color: #a599ff;
+  color: #373542;
+}
+.resposta-item {
+  margin-bottom: 12px;
+}
+
+.respostas-curtas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.resposta-box {
+  background-color: #f3f3f3;
+  border: 2px solid #242424;
+  color: #202020;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  min-width: 120px;
+  text-align: center;
+}
+
+.resposta-longa {
+  background-color: #f3f3f3;
+  padding: 10px 14px;
+  border-left: 4px solid #242424;
+  margin-bottom: 16px;
+  border-radius: 6px;
+}
+
+.resposta-longa pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin: 6px 0 0 0;
+}
+.enviarCopiaPorEmail {
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  background-color: #181818;
+  padding: 5px 20%;
+  color: #fff;
+  font-weight: 800;
+  border-radius: 10px;
+  border: none;
+
+}
+.enviarCopiaPorEmail:hover{
+  color: #181818;
+  background-color: #fff;
+  transition-duration: 0.2s;
+  border: solid;
+  border-color:#181818 ;
+  border-width: 1px;
+}
+.botaoEmail{
+  align-items: center;
+  text-align: center;
+  justify-content: center;
 }
