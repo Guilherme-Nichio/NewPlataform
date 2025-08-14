@@ -105,7 +105,7 @@ def register_formulario_routes(app):
                         resultado['Hidratação']
                     )
                 )
-
+    
                 conn.commit()
             return jsonify({"mensagem": "Respostas enviadas com sucesso!", 'resultado': resultado})
 

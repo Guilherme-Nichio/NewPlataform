@@ -1,10 +1,10 @@
 :root {
   --cor-fundo: #f5f7fa;
   --cor-texto: #333;
-  --cor-link: #0056b3;
-  --cor-link-hover: #003d80;
-  --cor-botao: #007bff;
-  --cor-botao-hover: #0056b3;
+  --cor-link: #181818;
+  --cor-link-hover: #181818;
+  --cor-botao: #181818;
+  --cor-botao-hover: #181818;
   --cor-borda: #ccc;
   --cor-fundo-container: #ffffff;
 }
@@ -18,7 +18,7 @@ body {
 }
 
 .container {
-  max-width: 600px;
+  max-width: 1500px;
   margin: auto;
   padding: 2rem;
   background-color: var(--cor-fundo-container);
@@ -28,7 +28,7 @@ body {
 }
 
 h2 {
-  text-align: center;
+  text-align: start;
   margin-bottom: 2rem;
   color: var(--cor-texto);
 }
@@ -49,7 +49,47 @@ a:hover {
   background-color: var(--cor-link-hover);
   color: #fff;
 }
-
+.texto-cabecalho{
+  color: #181818;
+}
+.topo{
+  display: flex;
+  justify-content: space-between;
+}
+.informacoes{
+  display: flex;
+  gap: 30px;
+  text-align: center;
+}
+.informacoes h3{
+  font-weight: bold;
+  font-size: 45px;
+  margin: 0;
+  padding: 0;
+}
+.informacoes P{
+  font-weight: bold;
+  font-size: 13px;
+  margin: 0;
+  padding: 5px;
+ 
+}
+.informacoes .box{
+  background-color: #181818;
+  color: #fff;
+  border-radius: 10PX;
+  width: 150px;
+  height: 105px;
+}
+.graph .container{
+  background-color: #181818;
+  border-radius: 10px;
+  width: 1000px;
+  height: 300px;
+  align-items: start;
+  justify-content: start;
+  text-align: start;
+}
 @media screen and (max-width: 600px) {
   .container {
     padding: 1rem;

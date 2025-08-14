@@ -3,6 +3,7 @@ from werkzeug.security import generate_password_hash
 import sqlite3
 from datetime import datetime, timedelta
 from openpyxl import load_workbook
+from conexaoabanco import admin
 
 def criar_admin():
     with sqlite3.connect('db.sqlite3') as conn:
