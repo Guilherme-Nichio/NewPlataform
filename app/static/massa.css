@@ -1,36 +1,69 @@
-/* Reset básico */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease;
 }
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #2c3e50, #4ca1af);
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 20px;
+body, html {
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background:  linear-gradient(to bottom, #b9b9b9, #ffffff);
+  overflow: hidden;
+}
+.waves {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 60vh;
+  z-index: 0;
+  overflow: hidden;
 }
 
-h1 {
-    margin-bottom: 30px;
-    font-size: 2rem;
-    text-align: center;
-    color: #ecf0f1;
+.waves svg {
+  width: 200%; 
+  height: 100%;
+  transform: scaleY(-1); 
+  animation: waveMove 10s linear infinite alternate;
+}
+
+@keyframes waveMove {
+  0% { transform: scaleY(-1) translateX(0); }
+  100% { transform: scaleY(-1) translateX(-25%); }
+}
+.massa-container {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.9);
+  width: 500px;
+  margin: 10% auto;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  text-align: center;
+}
+.massa-container img{
+    width: 10px;
+}
+.massa-container h2 {
+  margin-bottom: 20px;
+}
+.massa-container label{
+    color: #181818; ;
 }
 
 form {
     background-color: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(8px);
     border-radius: 12px;
+    
     padding: 30px;
+   
     width: 100%;
-    max-width: 400px;
+    max-width: 500px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
@@ -54,7 +87,7 @@ input[type="file"] {
 input[type="submit"] {
     width: 100%;
     padding: 12px;
-    background-color: #27ae60;
+    background-color: #181818;
     color: white;
     border: none;
     border-radius: 6px;
@@ -64,18 +97,18 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #219150;
+    background-color: #e6bc03;
 }
 
 a {
     margin-top: 20px;
     text-decoration: none;
-    color: #ecf0f1;
+    color: #141414;
     font-weight: bold;
     transition: color 0.3s;
 }
 
 a:hover {
-    color: #ffffff;
-    text-decoration: underline;
+    color: #2e2e2e;
+   
 }

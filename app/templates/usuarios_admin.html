@@ -7,14 +7,37 @@
 </head>
 <body>
   <div class="container">
-    <h2>Usuários Cadastrados</h2>
-    <a href="/admin/cadastrar">Novo Usuário</a><br><br>
-    <a href="/admin/cadastrar-em-massa">Cadastrar em massa</a><br><br>
-    Filtrar:
-    <a href="/admin/usuarios?filtro=todos">Todos</a> |
-    <a href="/admin/usuarios?filtro=ativos">Ativos</a> |
-    <a href="/admin/usuarios?filtro=inativos">Inativos</a><br><br>
+    <section class="topo">
+      <div class="texto-cabecalho">
+        <h2>Painel de Administrador</h2>
+        <p>Usuarios cadastrados</p>
+      </div>
+      <div class="informacoes">
+        <div class="box">
+          <h3>{{ ativos }}</h3>
+          <p>Usuarios ativos</p>
+        </div>
+        <div class="box">
+          <h3>{{ inativos }}</h3>
+          <p>Usuarios inativos</p>
+        </div>
+      </div>
+    </section>
+    <section class="options_button">
+      <div class="cadastro">
+        <a href="/admin/cadastrar">Novo Usuário</a>
+        <a href="/admin/cadastrar-em-massa">Cadastrar em massa</a>
+      </div>
 
+      <div class="filtro">
+        Filtrar:
+        <a href="/admin/usuarios?filtro=todos">Todos</a> 
+        <a href="/admin/usuarios?filtro=ativos">Ativos</a> 
+        <a href="/admin/usuarios?filtro=inativos">Inativos</a>
+      </div>
+    </section>
+
+    <input type="text" id="pesquisaNome" placeholder="Pesquisar por email..." class="input-pesquisa" />
     <table>
       <thead>
         <tr>
@@ -48,5 +71,6 @@
       </tbody>
     </table>
   </div>
+  <script src="{{ url_for('static', filename='admin_usuario.js') }}"></script>
 </body>
 </html>

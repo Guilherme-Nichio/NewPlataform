@@ -1,17 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
-    <title>Cadastro em Massa</title>
-     <link rel="stylesheet" href="{{ url_for('static', filename='massa.css') }}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='massa.css') }}">
+ 
 </head>
 <body>
-    <h1>Cadastrar Usuários em Massa</h1>
+    <div class="waves">
+        <svg viewBox="0 0 1200 200" preserveAspectRatio="none">
+        <path d="M0,0 C50,150 1050,-50 1200,100 L1200,200 L0,200 Z" fill="#181818" />
+        
+        </svg>
+
+      </div>
+  <div class="massa-container">
+    <h2>Cadastrar em Massa</h2>
     <form method="POST" enctype="multipart/form-data">
-        <label>Enviar arquivo Excel (.xlsx):</label><br>
-        <input type="file" name="arquivo" accept=".xlsx" required><br><br>
+        <label>📂 Selecionar Arquivo (.xlsx):</label>
+        <input type="file" name="arquivo" accept=".xlsx" required class="file-input">
         <input type="submit" value="Cadastrar Todos">
     </form>
     <br>
     <a href="/admin/usuarios">Voltar</a>
+  </div>
 </body>
+
 </html>

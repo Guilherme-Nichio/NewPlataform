@@ -24,23 +24,28 @@
           <div class="resposta-card" data-nome="{{ r.nome | lower }}">
             <div class="card-header">
               <div class="tipoPeleBox">
+                <div class="end-type">
+                  <div class="typeChar">{{ r.OxD }}</div>
+                  <div class="typeChar">{{ r.SxR }}</div>
+                  <div class="typeChar">{{ r.PxN }}</div>
+                  <div class="typeChar">{{ r.WxT }}</div>
+                </div>
                 <div class="tipoPele2">Nome: {{ r.nome }}</div>
                 <div class="tipoPele2">Telefone: {{ r.telefone }}</div>
-                <div class="typeChar">{{ r.OxD }}</div>
-                <div class="typeChar">{{ r.SxR }}</div>
-                <div class="typeChar">{{ r.PxN }}</div>
-                <div class="typeChar">{{ r.WxT }}</div>
+
+
               </div>
               <div class="seta">&#9654;</div>
             </div>
             <div class="card-body">
-              <strong>Respostas:</strong>
-              <div class="tipoPele">
-                Hidratação: {{ r.hidratacao }}
-              </div>
-              <div class="tipoPele">
-                Data do Envio: {{ r.data }}
-              </div>              
+              <div class="infoInicial">
+                <div class="tipoPele">
+                  Hidratação: {{ r.hidratacao }}
+                </div>
+                <div class="tipoPele">
+                  Data do Envio: {{ r.data }}
+                </div>   
+              </div>   
               <h3>Respostas do formulário:</h3>
                   <div class="respostas-container">
                   <!-- Respostas Curtas (Alternativas) -->
@@ -80,8 +85,7 @@
     </div>
 
     <div class="links">
-      <a href="/logout">Sair</a> |
-      <a href="/trocar-senha">Trocar Senha</a>
+      <a href="/logout">Sair</a> 
     </div>
   </div>
 

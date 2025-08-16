@@ -32,8 +32,14 @@ h2 {
   margin-bottom: 2rem;
   color: var(--cor-texto);
 }
-
-a {
+.buttons{
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  padding: 50px;
+  
+}
+.buttons a {
   text-decoration: none;
   color: var(--cor-link);
   font-weight: bold;
@@ -41,16 +47,21 @@ a {
   border: 1px solid var(--cor-borda);
   border-radius: 8px;
   transition: background-color 0.3s ease, color 0.3s ease;
-  margin: 0.2rem;
+  margin:0 80px ;
   display: inline-block;
+  width: 250px;
 }
 
-a:hover {
+.buttons a:hover {
   background-color: var(--cor-link-hover);
   color: #fff;
 }
+
 .texto-cabecalho{
   color: #181818;
+}
+.texto-cabecalho h2{
+  font-size: 30px;
 }
 .topo{
   display: flex;
@@ -84,7 +95,7 @@ a:hover {
 .graph .container{
   background-color: #181818;
   border-radius: 10px;
-  width: 1000px;
+  width: 1300px;
   height: 300px;
   align-items: start;
   justify-content: start;

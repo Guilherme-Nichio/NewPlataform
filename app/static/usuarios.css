@@ -1,8 +1,8 @@
 :root {
   --cor-fundo: #f5f7fa;
   --cor-texto: #333;
-  --cor-link: #0056b3;
-  --cor-link-hover: #003d80;
+  --cor-link: #1f1f1f;
+  --cor-link-hover: #1a1a1a;
   --cor-tabela-fundo: #fff;
   --cor-tabela-borda: #ccc;
   --cor-tabela-header: #e9ecef;
@@ -29,17 +29,6 @@ h2 {
   margin-bottom: 1.5rem;
 }
 
-a {
-  color: var(--cor-link);
-  text-decoration: none;
-  font-weight: bold;
-  margin-right: 0.5rem;
-}
-
-a:hover {
-  color: var(--cor-link-hover);
-}
-
 table {
   width: 100%;
   border-collapse: collapse;
@@ -57,7 +46,9 @@ th, td {
 }
 
 th {
-  background-color: var(--cor-tabela-header);
+  margin-top: 20px;
+  background-color: #181818;
+  color: #fff;
 }
 
 tr:nth-child(even) {
@@ -72,6 +63,98 @@ tr:nth-child(even) {
 .status-inativo {
   color: var(--cor-inativo);
   font-weight: bold;
+}
+.texto-cabecalho{
+  color: #181818;
+}
+.texto-cabecalho h2{
+  font-size: 30px;
+  margin: 0 10px 3px 0;
+}
+.texto-cabecalho p{
+  font-weight: 400;
+  font-size: 20px;
+  margin: 0;
+}
+.topo{
+  display: flex;
+  justify-content: space-between;
+}
+.informacoes{
+  display: flex;
+  gap: 30px;
+  text-align: center;
+}
+.informacoes h3{
+  font-weight: bold;
+  font-size: 45px;
+  margin: 0;
+  padding: 0;
+}
+.informacoes P{
+  font-weight: bold;
+  font-size: 13px;
+  margin: 0;
+  padding: 5px;
+ 
+}
+.informacoes .box{
+  background-color: #181818;
+  color: #fff;
+  border-radius: 10PX;
+  width: 150px;
+  height: 105px;
+}
+.options_button {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+.options_button .cadastro a {
+  text-decoration: none;
+  color: #181818;
+  font-weight: bold;
+  padding: 5px;
+  margin: 5px;
+  border: 1px solid #181818;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  display: inline-block;
+}
+.options_button .cadastro a:hover {
+  background-color: #181818;
+  color: #fff;
+}
+.options_button .filtro a{
+  text-decoration: none;
+  color: #181818;
+  font-weight: bold;
+  padding: 5px;
+  margin: 5px;
+  border: 1px solid #181818;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  display: inline-block;
+}
+
+.options_button .filtro a:hover {
+  background-color: #181818;
+  color: #fff;
+}
+
+.input-pesquisa {
+  margin-top: 50px;
+  width:100%;
+  max-width: 1000px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  margin-bottom: 25px;
+  font-size: 16px;
+  background-color: #dddddd;
+  color: #181818;
+  box-sizing: border-box;
+
 }
 
 @media screen and (max-width: 768px) {

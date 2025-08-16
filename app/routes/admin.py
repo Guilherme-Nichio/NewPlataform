@@ -31,13 +31,24 @@ def register_admin_routes(app):
     def admin():
         if 'user_id' not in session:
             return redirect('/login')
+            
+
         with sqlite3.connect('db.sqlite3') as conn:
+            total_respostas = conn.execute("SELECT COUNT(*) FROM respostas").fetchone()[0]
             formularios = conn.execute("SELECT id FROM formularios").fetchall()
             respostas = []
             for f in formularios:
                 r = conn.execute("SELECT * FROM respostas WHERE formulario_id=?", (f[0],)).fetchall()
                 respostas.extend(r)
-        return render_template('admin.html', respostas=respostas)
+
+            status = conn.execute("""
+                SELECT 
+                    SUM(CASE WHEN ativo = 1 THEN 1 ELSE 0 END) as ativos,
+                    SUM(CASE WHEN ativo = 0 THEN 1 ELSE 0 END) as inativos
+                FROM usuarios
+            """).fetchone()
+        
+        return render_template('admin.html', respostas=respostas,ativos=status[0] or 0,inativos=status[1] or 0, qntResposta = total_respostas)
 
     @app.route('/admin/cadastrar', methods=['GET', 'POST'])
     def cadastrar_usuario():
@@ -109,12 +120,11 @@ def register_admin_routes(app):
 
         filtro = request.args.get('filtro', 'todos')  # ativos, inativos, todos
         query = """
-            SELECT u.id, u.email,u.nome, u.tipo, u.ativo, u.data_expiracao, COUNT(r.id)
+            SELECT u.id, u.email, u.nome, u.tipo, u.ativo, u.data_expiracao, COUNT(r.id)
             FROM usuarios u
             LEFT JOIN formularios f ON f.user_id = u.id
             LEFT JOIN respostas r ON r.formulario_id = f.id
         """
-        cond = []
         if filtro == 'ativos':
             query += " WHERE u.ativo=1"
         elif filtro == 'inativos':
@@ -123,10 +133,23 @@ def register_admin_routes(app):
 
         with sqlite3.connect('db.sqlite3') as conn:
             usuarios = conn.execute(query).fetchall()
+            
+            # ---- NOVA QUERY para contar ativos/inativos ----
+            status = conn.execute("""
+                SELECT 
+                    SUM(CASE WHEN ativo = 1 THEN 1 ELSE 0 END) as ativos,
+                    SUM(CASE WHEN ativo = 0 THEN 1 ELSE 0 END) as inativos
+                FROM usuarios
+            """).fetchone()
 
-        return render_template('usuarios_admin.html', usuarios=usuarios, filtro=filtro)
-
-
+        return render_template(
+            'usuarios_admin.html',
+            usuarios=usuarios,
+            filtro=filtro,
+            ativos=status[0] or 0,
+            inativos=status[1] or 0
+        )
+    
     @app.route('/admin/usuario/<int:user_id>/toggle')
     def toggle_usuario(user_id):
         if session.get('tipo') != 'admin':

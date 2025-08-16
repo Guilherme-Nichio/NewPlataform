@@ -342,7 +342,7 @@ function renderizarPergunta() {
   } else if (atual.tipo === "aberta") {
     const textarea = document.createElement("textarea");
     textarea.rows = 4;
-    textarea.style.width = "100%";
+    textarea.classList.add("resposta-textarea");
     textarea.placeholder = "Digite sua resposta aqui...";
     textarea.addEventListener("input", () => {
       respostaAtual = textarea.value.trim();
@@ -382,23 +382,27 @@ function enviarRespostas() {
   })
     .then(response => response.json())
     .then(data => {
-      questionText.textContent = "Quiz finalizado!";
+      progressFill.style.display = "none";
+      questionText.style.display = "none";
+      document.querySelector(".progress-bar").style.display = "none";
 
-      if (data.resultado) {
-        const r = data.resultado;
-        const resultadoTexto = `
-          <h3>Resultado da sua pele:</h3>
-          <ul>
-            <li><strong>Oleosidade:</strong> ${r["O x D"]}</li>
-            <li><strong>Sensibilidade:</strong> ${r["S x R"]}</li>
-            <li><strong>Pigmentação:</strong> ${r["P x N"]}</li>
-            <li><strong>Firmeza:</strong> ${r["W x T"]}</li>
-            <li><strong>Hidratação:</strong> ${r["Hidratação"]}</li>
-            <li><strong>Código final:</strong> <span style="font-weight:bold">${r["Tipo_de_pele"]}</span></li>
-          </ul>
-        `;
 
-        optionsContainer.innerHTML = resultadoTexto;
+    if (data.resultado) {
+      const r = data.resultado;
+      const resultadoTexto = `
+        <h3 style="text-align:center; margin-bottom:15px;font-size:20px">Resultado da sua pele:</h3>
+        <div class="resultado-box">
+          <div class="resultado-item"><strong>Oleosidade:</strong> ${r["O x D"]}</div>
+          <div class="resultado-item"><strong>Sensibilidade:</strong> ${r["S x R"]}</div>
+          <div class="resultado-item"><strong>Pigmentação:</strong> ${r["P x N"]}</div>
+          <div class="resultado-item"><strong>Firmeza:</strong> ${r["W x T"]}</div>
+          <div class="resultado-item"><strong>Hidratação:</strong> ${r["Hidratação"]}</div>
+          <div class="resultado-item final"><strong>Tipo de pele:</strong> ${r["Tipo_de_pele"]}</div>
+        </div>
+      `;
+      optionsContainer.innerHTML = resultadoTexto;
+    
+
       } else {
         optionsContainer.innerHTML = `<p>${data.mensagem}</p>`;
       }
