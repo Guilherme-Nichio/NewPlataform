@@ -4,7 +4,11 @@ import sqlite3
 from datetime import datetime, timedelta
 from openpyxl import load_workbook
 from conexaoabanco import admin
-
+import matplotlib.pyplot as plt
+import io
+import base64
+from collections import Counter
+from itertools import product
 def criar_admin():
     with sqlite3.connect('db.sqlite3') as conn:
         c = conn.cursor()
@@ -16,7 +20,24 @@ def criar_admin():
                     ("admin@admin.com","admin", senha_hash, "00000000", "admin")
             )
             conn.commit()
-            
+def gerar_contagem_tipos():
+    # Pega todas as respostas
+    with sqlite3.connect('db.sqlite3') as conn:
+        rows = conn.execute("SELECT OxD, SxR, PxN, WxT FROM respostas").fetchall()
+    
+    tipos_respostas = [''.join(r) for r in rows]
+    contagem = Counter(tipos_respostas)
+
+    # Todos os 16 tipos possíveis
+    oxd = ['O','D']
+    sxr = ['S','R']
+    pxn = ['P','N']
+    wxt = ['W','T']
+    todos_tipos = [''.join(p) for p in product(oxd, sxr, pxn, wxt)]
+
+    # Garantir que todos os 16 tipos apareçam
+    resultado = {t: contagem.get(t,0) for t in todos_tipos}
+    return resultado    
 def register_admin_routes(app):
 
     def enviar_email(destinatario, senha):
@@ -31,24 +52,25 @@ def register_admin_routes(app):
     def admin():
         if 'user_id' not in session:
             return redirect('/login')
-            
-
+        
         with sqlite3.connect('db.sqlite3') as conn:
             total_respostas = conn.execute("SELECT COUNT(*) FROM respostas").fetchone()[0]
-            formularios = conn.execute("SELECT id FROM formularios").fetchall()
-            respostas = []
-            for f in formularios:
-                r = conn.execute("SELECT * FROM respostas WHERE formulario_id=?", (f[0],)).fetchall()
-                respostas.extend(r)
-
             status = conn.execute("""
                 SELECT 
                     SUM(CASE WHEN ativo = 1 THEN 1 ELSE 0 END) as ativos,
                     SUM(CASE WHEN ativo = 0 THEN 1 ELSE 0 END) as inativos
                 FROM usuarios
             """).fetchone()
+
+        tipos = gerar_contagem_tipos()
         
-        return render_template('admin.html', respostas=respostas,ativos=status[0] or 0,inativos=status[1] or 0, qntResposta = total_respostas)
+        return render_template('admin.html', 
+                            ativos=status[0] or 0,
+                            inativos=status[1] or 0, 
+                            qntResposta=total_respostas,
+                            tipos=tipos)
+
+
 
     @app.route('/admin/cadastrar', methods=['GET', 'POST'])
     def cadastrar_usuario():

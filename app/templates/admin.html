@@ -10,6 +10,11 @@
     <section class="topo">
       <div class="texto-cabecalho">
         <h2>Painel de Administrador</h2>
+        <section class="buttons">
+          <a href="/admin/usuarios">Usuarios Cadastrados</a>
+          <a href="/trocar-senha">Trocar Senha</a>
+          <a href="/logout">Sair</a>
+       </section>
       </div>
       <div class="informacoes">
         <div class="box">
@@ -25,18 +30,20 @@
           <p>Respostas</p>
         </div>
       </div>
+
     </section>
     <section class="graph">
       <div class="container">
-        
+        <!-- Passa os dados via dataset -->
+        <canvas id="graficoTipos" data-tipos='{{ tipos|tojson }}'></canvas>
       </div>
     </section>
-    <section class="buttons">
-      <a href="/admin/usuarios">Usuarios Cadastrados</a>
-      <a href="/trocar-senha">Trocar Senha</a>
-      <a href="/logout">Sair</a>
-    </section>
+
+ 
 
   </div>
+  <!-- Importa Chart.js e seu script -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="{{ url_for('static', filename='grafico_tipos.js') }}"></script>
 </body>
 </html>
