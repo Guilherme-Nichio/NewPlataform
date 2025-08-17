@@ -108,6 +108,18 @@ h2 {
     width: 100% !important;
     height: 100% !important;
 }
+.footer {
+  background-color: #181818; /* mesma cor do topo ou boxes */
+  color: #fff;
+  text-align: center;
+  padding: 15px 0;
+  border-radius: 10px;
+  margin-top: 30px;
+  font-size: 14px;
+}
+.footer img{
+    width: 25%;
+}
 
 @media screen and (max-width: 600px) {
   .container {
