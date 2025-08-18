@@ -387,23 +387,48 @@ function enviarRespostas() {
       document.querySelector(".progress-bar").style.display = "none";
 
 
-    if (data.resultado) {
-      const r = data.resultado;
-      const resultadoTexto = `
-        <h3 style="text-align:center; margin-bottom:15px;font-size:20px">Resultado da sua pele:</h3>
-        <div class="resultado-box">
-          <div class="resultado-item"><strong>Oleosidade:</strong> ${r["O x D"]}</div>
-          <div class="resultado-item"><strong>Sensibilidade:</strong> ${r["S x R"]}</div>
-          <div class="resultado-item"><strong>Pigmentação:</strong> ${r["P x N"]}</div>
-          <div class="resultado-item"><strong>Firmeza:</strong> ${r["W x T"]}</div>
-          <div class="resultado-item"><strong>Hidratação:</strong> ${r["Hidratação"]}</div>
-          <div class="resultado-item final"><strong>Tipo de pele:</strong> ${r["Tipo_de_pele"]}</div>
-        </div>
-      `;
-      optionsContainer.innerHTML = resultadoTexto;
-    
+if (data.resultado) {
+  const r = data.resultado;
+  const resultadoTexto = `
+    <h3 style="text-align:center; margin-bottom:15px;font-size:20px">Obrigado por responder!</h3>
+    <div class="resultado-box">
+      <div class="resultado-item final"><strong>Tipo de pele:</strong> ${r["Tipo_de_pele"]}</div>        
+      <div class="resultado-item"><strong>Oleosidade:</strong> ${r["O x D"]}</div>
+      <div class="resultado-item"><strong>Sensibilidade:</strong> ${r["S x R"]}</div>
+      <div class="resultado-item"><strong>Pigmentação:</strong> ${r["P x N"]}</div>
+      <div class="resultado-item"><strong>Firmeza:</strong> ${r["W x T"]}</div>
+      <div class="resultado-item"><strong>Hidratação:</strong> ${r["Hidratação"]}</div>
+    </div>
+  `;
 
-      } else {
+      // Texto que será enviado via WhatsApp
+      const textoWhatsApp = `
+    Resultado do seu teste de pele:
+    Tipo de pele: ${r["Tipo_de_pele"]}
+    Oleosidade: ${r["O x D"]}
+    Sensibilidade: ${r["S x R"]}
+    Pigmentação: ${r["P x N"]}
+    Firmeza: ${r["W x T"]}
+    Hidratação: ${r["Hidratação"]}
+    `;
+
+      // Cria o botão de WhatsApp
+      const botaoWhatsApp = document.createElement("a");
+      botaoWhatsApp.href = `https://wa.me/?text=${encodeURIComponent(textoWhatsApp)}`;
+      botaoWhatsApp.target = "_blank";
+      botaoWhatsApp.textContent = "Compartilhar no WhatsApp";
+      botaoWhatsApp.style.display = "inline-block";
+      botaoWhatsApp.style.marginTop = "15px";
+      botaoWhatsApp.style.padding = "10px 20px";
+      botaoWhatsApp.style.backgroundColor = "#004b1bff";
+      botaoWhatsApp.style.color = "white";
+      botaoWhatsApp.style.borderRadius = "12px";
+      botaoWhatsApp.style.textAlign = "center";
+      botaoWhatsApp.style.textDecoration = "none";
+
+      optionsContainer.innerHTML = resultadoTexto;
+      optionsContainer.appendChild(botaoWhatsApp);
+    } else {
         optionsContainer.innerHTML = `<p>${data.mensagem}</p>`;
       }
     })

@@ -1,6 +1,6 @@
 :root {
   --cor-fundo: #f5f7fa;
-  --cor-texto: #333;
+  --cor-texto: #181818;
   --cor-link: #181818;
   --cor-link-hover: #181818;
   --cor-botao: #181818;
@@ -93,6 +93,7 @@ h2 {
   border-radius: 10PX;
   width: 150px;
   height: 105px;
+  padding-top: 10px;
 }
 .graph .container{
   background-color: #181818;
@@ -121,16 +122,3 @@ h2 {
     width: 25%;
 }
 
-@media screen and (max-width: 600px) {
-  .container {
-    padding: 1rem;
-    margin-top: 1.5rem;
-  }
-
-  a {
-    display: block;
-    width: 100%;
-    margin-bottom: 0.5rem;
-    text-align: center;
-  }
-}

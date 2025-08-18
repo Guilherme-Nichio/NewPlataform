@@ -157,39 +157,88 @@ tr:nth-child(even) {
 
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
   .container {
     padding: 1rem;
   }
 
-  table, thead, tbody, th, td, tr {
+  /* topo ajustado */
+  .topo {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .informacoes {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .informacoes .box {
+    flex: 1 1 120px;
+    max-width: 180px;
+    height: auto;
+    padding: 10px;
+  }
+
+  .informacoes h3 {
+    font-size: 28px;
+  }
+
+  .informacoes p {
+    font-size: 12px;
+  }
+
+  /* botões mais fluidos */
+  .options_button {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .options_button .cadastro,
+  .options_button .filtro {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .options_button a {
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+
+  /* input ocupa toda largura */
+  .input-pesquisa {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  /* tabela mantém formato, mas com scroll horizontal */
+  table {
     display: block;
-  }
-
-  thead {
-    display: none;
-  }
-
-  tr {
-    margin-bottom: 1rem;
-    border: 1px solid var(--cor-tabela-borda);
+    overflow-x: auto;
+    white-space: nowrap;
     border-radius: 8px;
-    background-color: #fff;
-    padding: 0.5rem;
   }
 
-  td {
-    text-align: right;
-    padding-left: 50%;
-    position: relative;
+  th, td {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .informacoes {
+    flex-direction: column;
+    align-items: center;
   }
 
-  td::before {
-    content: attr(data-label);
-    position: absolute;
-    left: 1rem;
-    top: 0.75rem;
-    font-weight: bold;
-    text-align: left;
+  .informacoes .box {
+    width: 100%;
+    max-width: 250px;
   }
 }

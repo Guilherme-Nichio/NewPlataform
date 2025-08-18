@@ -39,8 +39,12 @@ h3 {
 }
 
 .copy-button:hover {
-  background-color: #f3f3f3;
+  background-color: #ffa115;
+  color: #181818;
+
+  border-radius: 10px;
 }
+
 
 .input-pesquisa {
   width: 100%;

@@ -90,3 +90,37 @@ body, html {
   background-color: #f7f7f7;
   color: rgba(24, 24, 24);;
 }
+
+@media screen and (max-width: 768px) {
+  body, html {
+    display: flex;
+    justify-content: center; /* centraliza horizontalmente */
+    align-items: center;     /* centraliza verticalmente */
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .index1 {
+    width: 90%; /* ou um valor fixo menor, tipo 300px */
+    margin: 0;  /* remove margin para centralização vertical */
+  }
+
+  .index1 img{
+      width: 100%;
+  }
+  .index1 input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+
+  .index1 a {
+    width: 100%;
+    margin-top: 25px;
+    padding: 12px 25px;
+    text-decoration: none;
+  }
+}

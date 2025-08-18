@@ -78,3 +78,25 @@ body, html {
 .login-container button:hover {
   background-color: #ffa115;
 }
+
+@media screen and (max-width: 768px) {
+  body, html {
+    display: flex;
+    justify-content: center; /* centraliza horizontalmente */
+    align-items: center;     /* centraliza verticalmente */
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  .login-container {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.9);
+  width: 350px;
+  margin: 10% auto;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  text-align: center;
+}
+}

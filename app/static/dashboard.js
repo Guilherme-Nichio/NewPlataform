@@ -1,11 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
   const btnCopiar = document.getElementById('btnCopiarLink');
+  const btnWhatsApp = document.getElementById('btnWhatsAppLink');
   const inputPesquisa = document.getElementById('pesquisaNome');
   const listaRespostas = document.getElementById('listaRespostas');
 
   // Botão de copiar link
   if (btnCopiar) {
     btnCopiar.addEventListener('click', copiarLink);
+  }
+
+  // Botão de compartilhar no WhatsApp
+  if (btnWhatsApp) {
+    btnWhatsApp.addEventListener('click', compartilharWhatsApp);
   }
 
   // Inicia todas as respostas recolhidas
@@ -44,18 +50,47 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// Função para gerar link e copiar
 function copiarLink() {
-  fetch('/api/gerar-link', {
-    method: 'POST'
-  })
-  .then(response => response.json())
-  .then(data => {
-    navigator.clipboard.writeText(data.link)
-      .then(() => alert("Link copiado para a área de transferência!"))
-      .catch(err => alert("Erro ao copiar: " + err));
-  })
-  .catch(error => {
-    alert("Erro ao gerar o link: " + error);
-  });
+  fetch('/api/gerar-link', { method: 'POST' })
+    .then(response => response.json())
+    .then(data => {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(data.link)
+          .then(() => alert("Link copiado para a área de transferência!"))
+          .catch(() => fallbackCopiar(data.link));
+      } else {
+        fallbackCopiar(data.link);
+      }
+    })
+    .catch(error => {
+      alert("Erro ao gerar o link: " + error);
+    });
+}
+
+// Função fallback para copiar link (para navegadores que não suportam navigator.clipboard)
+function fallbackCopiar(texto) {
+  const inputTemp = document.createElement("textarea");
+  inputTemp.value = texto;
+  document.body.appendChild(inputTemp);
+  inputTemp.select();
+  document.execCommand("copy");
+  document.body.removeChild(inputTemp);
+  alert("Link copiado para a área de transferência!");
+}
+
+// Função para gerar link e compartilhar no WhatsApp
+function compartilharWhatsApp() {
+  fetch('/api/gerar-link', { method: 'POST' })
+    .then(response => response.json())
+    .then(data => {
+      // Certifique-se de que o link tem https://
+      const link = data.link.startsWith("http") ? data.link : "https://" + data.link;
+      const mensagem = encodeURIComponent("Confira este formulário: " + link);
+      const urlWhatsApp = `https://api.whatsapp.com/send?text=${mensagem}`;
+      window.location.href = urlWhatsApp; // abre direto no app WhatsApp
+    })
+    .catch(error => {
+      alert("Erro ao gerar o link: " + error);
+    });
+
 }

@@ -14,5 +14,6 @@ register_dashboard_routes(app)
 register_formulario_routes(app)
 
 if __name__ == '__main__':
+    
     criar_admin()
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000,debug=True)
