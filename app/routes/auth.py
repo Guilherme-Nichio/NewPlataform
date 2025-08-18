@@ -1,6 +1,7 @@
 from flask import render_template, request, redirect, session
 from werkzeug.security import generate_password_hash, check_password_hash
 import sqlite3
+from BancoFunctions import *
 
 def register_auth_routes(app):
     # Rota de logout
@@ -21,16 +22,15 @@ def register_auth_routes(app):
         if request.method == 'POST':
             email = request.form['email']
             senha = request.form['senha']
-            with sqlite3.connect('db.sqlite3') as conn:
-                user = conn.execute("SELECT * FROM usuarios WHERE email=?", (email,)).fetchone()
-                if user and check_password_hash(user[3], senha):
-                    session['user_id'] = user[0]
-                    session['email'] = user[1]
-                    session['tipo'] = user[5]
-                    session['nome'] = user[2]
-                    if user[5] == 'admin':
-                        return redirect('/admin')
-                    return redirect('/dashboard')
+            user = login_auth(email)
+            if user and check_password_hash(user[3], senha):
+                session['user_id'] = user[0]
+                session['email'] = user[1]
+                session['tipo'] = user[5]
+                session['nome'] = user[2]
+                if user[5] == 'admin':
+                    return redirect('/admin')
+                return redirect('/dashboard')
             return "Login inválido."
         return render_template('login.html')
 
